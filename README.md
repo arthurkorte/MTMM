@@ -5,11 +5,14 @@
 The MTMM function as published in [Nature Genetics](http://www.nature.com/ng/journal/v44/n9/full/ng.2376.html) currently don't support estimates on missing data and replicates. 
 This is work in progress and will be accordingly updated here.
 
-For questions and comments feel free to contact me: arthur.korte@gmi.oeaw.ac.at 
+For questions and comments feel free to contact me: arthur.korte@gmail.com
+ 
 
 ## How to use
+
+# To only perform a Variance Coponent Analysis use the mtmm_estimate.r script
  
-```R
+
 # Load libraries and source needed functions
 # The AsREML package needs a valid license that can be obtained at  http://www.vsni.co.uk/software/asreml
 
