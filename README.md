@@ -10,9 +10,8 @@ For questions and comments feel free to contact me: arthur.korte@gmail.com
 
 ## How to use
 
-# To only perform a Variance Coponent Analysis use the mtmm_estimate.r script
+# To only perform a Variance Coponent Analysis use the mtmm_estimate.r script with the flag only.vca=T set
  
-
 # Load libraries and source needed functions
 # The AsREML package needs a valid license that can be obtained at  http://www.vsni.co.uk/software/asreml
 
