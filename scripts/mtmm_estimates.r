@@ -1,3 +1,5 @@
+
+
 ### function for estimating the MTMM parameters using ASREML, to get passed on to a non-ASREML programm !!
 #library(lattice)
 #library(asreml)
@@ -5,7 +7,7 @@
 #library(nadiv)
 #source('emma.r')
 
-mtmm_estimates<-function(Y,k=2,l=3,K,method='default')  {
+mtmm_estimates<-function(Y,k=2,l=3,K,method='default',only.vca=FALSE)  {
 
 name<-paste(colnames(Y)[k],colnames(Y)[l],'mtmm_estimates.rda',sep='_')
 Y<-Y[,c(1,k,l)]
@@ -240,10 +242,12 @@ cof_t<-crossprod(M,cbind(Xo,Env))
 
 
 
+if(only.vca==T) {return(unlist(correlation))
+} else {
 
 save(n,cof_t,M,Env,correlation,varcov,Y_t,ecot_id,Xo,K_stand,ecot_id,file=name)
 
-}
+}}
 
 
 
