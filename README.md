@@ -34,7 +34,7 @@ load('data/MTMM_SAMPLE_DATA.Rdata')
 mtmm(Y,X,K,method='default',include.single.analysis=T,calculate.effect.size=T,gen.data='binary',exclude=T,run=T)
 
 # To only perform a Variance Coponent Analysis use the mtmm_estimate.r script with the flag only.vca=T set
-VCA<-mtmm_estimates(Y,K=K,vca.only=T)
+VCA<-mtmm_estimates(Y,K=K,only.vca=T)
 
 # the function outputs a list called results  ($phenotype ,$pvals, $statistics, $kinship)
 output<-results$pvals
