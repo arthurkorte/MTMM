@@ -93,18 +93,18 @@ data_asr$Env<-as.factor(data_asr$Env)
 
 ## setting starting values
 
-sigma1<<-null1$vg
-sigma2<<-null2$vg
-rho<<-cor(Y1,Y2)/(sqrt(herit1)*sqrt(herit2))
+sigma1<-null1$vg
+sigma2<-null2$vg
+rho<-cor(Y1,Y2)/(sqrt(herit1)*sqrt(herit2))
 ###set borders for rho between -1 and 1
 if (rho>0.98) {rho<-0.98
 }else { if (rho< -0.98) {rho<--0.98}}
 
 
 #alpha_e<-rho*sqrt((null1$vg+null1$ve)*(null2$vg+null2$ve))
-alpha<<-rho*sqrt(null1$vg*null2$vg)
-beta2<<-cor(Y1,Y2)*sqrt(null1$ve*null2$ve)
-alpha2<<-cor(Y1,Y2)*sqrt(null1$vg*null2$vg)
+alpha<-rho*sqrt(null1$vg*null2$vg)
+beta2<-cor(Y1,Y2)*sqrt(null1$ve*null2$ve)
+alpha2<-cor(Y1,Y2)*sqrt(null1$vg*null2$vg)
 
 
 
@@ -112,7 +112,7 @@ if ( method == "default" ) {
 
 
  
-mixmod.asr<-asreml(fixed=Y_ok~Env,random=~us(Env,init=c(sigma1,alpha,sigma2)):giv(ecot_id),ginverse=list(ecot_id=K_inv),rcov=~at(Env,init=c(null1$ve,null2$ve)):units,data=data_asr,maxit=50)
+mixmod.asr<-asreml(fixed=Y_ok~Env,random=~us(Env,init=c(sigma1,alpha,sigma2)):giv(ecot_id),asr_vm(ecot_id,K_inv),r=~at(Env,init=c(null1$ve,null2$ve)):units,data=data_asr,maxit=50)
 varcov<-matrix(data=c(summary(mixmod.asr)$varcomp$component[1:2],summary(mixmod.asr)$varcomp$component[2:3]),nrow=2,ncol=2)
 
 ve<-matrix(data=c(summary(mixmod.asr)$varcomp$component[4],rep(0,2),summary(mixmod.asr)$varcomp$component[5]),nrow=2,ncol=2)
@@ -125,7 +125,7 @@ ve<-matrix(data=c(summary(mixmod.asr)$varcomp$component[4],rep(0,2),summary(mixm
 ### including autocorrelation 
 
 
-mixmod.asr<-asreml(fixed=Y_ok~Env,random=~us(Env,init=c(sigma1,alpha2,sigma2)):giv(ecot_id),ginverse=list(ecot_id=K_inv),rcov=~us(Env,init=c(null1$ve,beta2,null2$ve)):id(ecot_id),data=data_asr,maxit=100)
+mixmod.asr<-asreml(fixed=Y_ok~Env,random=~us(Env,init=c(sigma1,alpha2,sigma2)):giv(ecot_id),asr_vm(ecot_id,K_inv),residual=~us(Env,init=c(null1$ve,beta2,null2$ve)):id(ecot_id),data=data_asr,maxit=100)
 
 varcov<-matrix(data=c(summary(mixmod.asr)$varcomp$component[1:2],summary(mixmod.asr)$varcomp$component[2:3]),nrow=2,ncol=2)
 
@@ -164,7 +164,7 @@ covP<-aiFun(hallo)
 covG[upper.tri(covG)==T]<-covG[lower.tri(covG)==T]
 
 covP[upper.tri(covP)==T]<-covP[lower.tri(covP)==T]
-null.g<-asreml(fixed=Y_ok~Env,random=~idh(Env,init=c(sigma1,sigma2)):giv(ecot_id),ginverse=list(ecot_id=K_inv),rcov=~at(Env,init=c(null1$ve,null2$ve)):units,data=data_asr,maxit=50)
+null.g<-asreml(fixed=Y_ok~Env,random=~idh(Env,init=c(sigma1,sigma2)):giv(ecot_id),asr_vm(ecot_id,K_inv),residual=~at(Env,init=c(null1$ve,null2$ve)):units,data=data_asr,maxit=50)
 
 
 ap<-hallo$loglik
@@ -193,8 +193,8 @@ covP<-aiFun(hallo)[-4,-4]
 covG[upper.tri(covG)==T]<-covG[lower.tri(covG)==T]
 covE[upper.tri(covE)==T]<-covE[lower.tri(covE)==T]
 covP[upper.tri(covP)==T]<-covP[lower.tri(covP)==T]
-null.e<-asreml(fixed=Y_ok~Env,random=~us(Env,init=c(sigma1,alpha2,sigma2)):giv(ecot_id),ginverse=list(ecot_id=K_inv),rcov=~idh(Env,init=c(null1$ve,null2$ve)):id(ecot_id),data=data_asr,maxit=50)
-null.g<-asreml(fixed=Y_ok~Env,random=~idh(Env,init=c(sigma1,sigma2)):giv(ecot_id),ginverse=list(ecot_id=K_inv),rcov=~us(Env,init=c(null1$ve,beta2,null2$ve)):id(ecot_id),data=data_asr,maxit=50)
+null.e<-asreml(fixed=Y_ok~Env,random=~us(Env,init=c(sigma1,alpha2,sigma2)):giv(ecot_id),asr_vm(ecot_id,K_inv),residual=~idh(Env,init=c(null1$ve,null2$ve)):id(ecot_id),data=data_asr,maxit=50)
+null.g<-asreml(fixed=Y_ok~Env,random=~idh(Env,init=c(sigma1,sigma2)):giv(ecot_id),asr_vm(ecot_id,K_inv),residual=~us(Env,init=c(null1$ve,beta2,null2$ve)):id(ecot_id),data=data_asr,maxit=50)
 
 
 ap<-hallo$loglik
