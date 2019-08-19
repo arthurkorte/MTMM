@@ -35,10 +35,13 @@ mtmm_estimates(Y,k=2,l=3,K,method='default',only.vca=FALSE)
 ## this script will generate all the needed data for the GWAS using the estimates from the asreml call
 ## it will save all data as an .rda file named [Y1]_[Y2]_mtmm_estimates.rda
 ## you need to load this data before you can continue.
-mydata<-'SD_SDV_mtmm_estimates.rda'
+k=2
+l=3
+mydata<-paste(colnames(Y)[k],colnames(Y)[l],'mtmm_estimates.rda',sep='_')
+
 load(mydata)
 ## create the name of your output file 
-out.name=paste(colnames(Y)[2],'_',colnames(Y)[3],'_mtmm_results',sep='')
+out.name=paste(colnames(Y)[k],'_',colnames(Y)[l],'_mtmm_results',sep='')
 
 ## mtmm_cluster is a wrapper script to run the MTMM with data from the Arabidopsis 1001 Genomes project in a sequential way
 ## you can get the sequencing data here https://go.uniwue.de/2029data
