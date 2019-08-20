@@ -1,5 +1,5 @@
 
-mtmm_part2<-function(X,incl.singleGWAS=FALSE,use.SNP_INFO=FALSE,mac=6) {
+mtmm_part2<-function(X,incl.singleGWAS=FALSE,use.SNP_INFO=FALSE,mac=5) {
 
 X_<-X[rownames(X)%in%ecot_id,]
 rm(X)
