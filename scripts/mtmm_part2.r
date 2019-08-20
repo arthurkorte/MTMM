@@ -1,5 +1,5 @@
 
-mtmm_part2<-function(X,incl.singleGWAS=FALSE,use.SNP_INFO=FALSE) {
+mtmm_part2<-function(X,incl.singleGWAS=FALSE,use.SNP_INFO=FALSE,mac=6) {
 
 X_<-X[rownames(X)%in%ecot_id,]
 rm(X)
@@ -12,7 +12,7 @@ MAC<-data.frame(AC,MAC=apply(AC[,c(2,4)],1,min)+0.5*AC$AC_0.5)
 MAF<-data.frame(MAC,MAF=(MAC$MAC/nrow(X_)))
 
 
-MAF_ok<-subset(MAF,MAF!=0)
+MAF_ok<-subset(MAF,MAC>mac)
 
 X_ok<-X_[,colnames(X_) %in% MAF_ok[,1]]
 
