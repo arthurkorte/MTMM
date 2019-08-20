@@ -1,2 +1,0 @@
-/tmp/slurmd/job91437/slurm_script: line 3: cd: /storage/evolgen/AraGWAS_perm/Y_: No such file or directory
-/tmp/slurmd/job91437/slurm_script: line 7: /storage/evolgen/R/scripts/ara_perm.r: No such file or directory
